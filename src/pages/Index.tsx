@@ -12,7 +12,6 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background font-[Onest]">
-      <Navbar />
       <main>
         <HeroSection />
         <AboutSection />
@@ -22,8 +21,6 @@ const Index = () => {
         <GallerySection />
         <ContactSection />
       </main>
-      <Footer />
-      <FloatingWhatsApp />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ChevronDown, Globe, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,9 @@ const Navbar = () => {
   const [langPos, setLangPos] = useState({ top: 0, right: 0 });
 
   const { language, setLanguage, t } = useLanguage();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === "/";
 
   const menuItems = ["home", "about", "products", "export", "gallery", "contact"];
 
@@ -26,6 +30,8 @@ const Navbar = () => {
   }, []);
 
   const initObserver = () => {
+    if (!isHomePage) return;
+
     observerRef.current?.disconnect();
 
     observerRef.current = new IntersectionObserver(
@@ -46,22 +52,41 @@ const Navbar = () => {
   useEffect(() => {
     initObserver();
     return () => observerRef.current?.disconnect();
-  }, []);
+  }, [isHomePage]);
 
   useEffect(() => {
     if (!navRef.current || !underlineRef.current) return;
 
-    const activeBtn = navRef.current.querySelector<HTMLButtonElement>(`[data-id="${activeSection}"]`);
-    if (!activeBtn) return;
+    // If not on home page and activeSection is 'blog', move underline to blog link
+    // But we don't have a 'blog' data-id in the loop.
+    // Let's handle 'blog' separately or add it to the logic.
+    
+    let targetBtn: HTMLElement | null = null;
+    
+    if (location.pathname.startsWith('/blog')) {
+       targetBtn = navRef.current.querySelector<HTMLAnchorElement>(`a[href="/blog"]`);
+    } else if (isHomePage) {
+       targetBtn = navRef.current.querySelector<HTMLButtonElement>(`[data-id="${activeSection}"]`);
+    }
+
+    if (!targetBtn) {
+        underlineRef.current.style.transform = `scaleX(0)`;
+        return;
+    }
 
     const navRect = navRef.current.getBoundingClientRect();
-    const btnRect = activeBtn.getBoundingClientRect();
+    const btnRect = targetBtn.getBoundingClientRect();
 
     underlineRef.current.style.width = `${btnRect.width}px`;
     underlineRef.current.style.transform = `translateX(${btnRect.left - navRect.left}px) scaleX(1)`;
-  }, [activeSection]);
+  }, [activeSection, location.pathname, isHomePage]);
 
   const scrollToSection = (id: string) => {
+    if (!isHomePage) {
+      navigate("/", { state: { scrollTo: id } });
+      return;
+    }
+
     observerRef.current?.disconnect();
     setActiveSection(id);
 
@@ -71,6 +96,18 @@ const Navbar = () => {
     setTimeout(initObserver, 1000);
   };
 
+  // Handle scroll after navigation
+  useEffect(() => {
+    if (isHomePage && location.state && (location.state as any).scrollTo) {
+      const scrollTo = (location.state as any).scrollTo;
+      setTimeout(() => {
+        scrollToSection(scrollTo);
+        // Clear state
+        window.history.replaceState({}, document.title);
+      }, 100);
+    }
+  }, [isHomePage, location]);
+
   const languages = [
     { code: "en", name: t("nav.languages.en") },
     { code: "id", name: t("nav.languages.id") },
@@ -79,7 +116,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 w-full z-50 transition-colors duration-200 ${isScrolled ? "bg-charcoal/85 backdrop-blur shadow-lg" : "bg-transparent"}`}>
+      <nav className={`fixed top-0 w-full z-50 transition-colors duration-200 ${isScrolled || !isHomePage ? "bg-charcoal/85 backdrop-blur shadow-lg" : "bg-transparent"}`}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div onClick={() => scrollToSection("home")} className="cursor-pointer flex items-center gap-3">
@@ -90,10 +127,13 @@ const Navbar = () => {
 
             <div ref={navRef} className="relative hidden md:flex items-center gap-4">
               {menuItems.map((id) => (
-                <button key={id} data-id={id} onClick={() => scrollToSection(id)} className={`nav-link ${activeSection === id ? "nav-active" : ""}`}>
+                <button key={id} data-id={id} onClick={() => scrollToSection(id)} className={`nav-link ${activeSection === id && isHomePage ? "nav-active" : ""}`}>
                   {t(`nav.${id}`)}
                 </button>
               ))}
+              <Link to="/blog" className={`nav-link ${location.pathname.startsWith('/blog') ? "nav-active" : ""}`}>
+                Blog
+              </Link>
               <span ref={underlineRef} className="nav-underline" />
             </div>
 
@@ -151,10 +191,13 @@ const Navbar = () => {
         <div className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden">
           <div className="absolute top-20 left-0 w-full bg-charcoal p-6 space-y-4">
             {menuItems.map((id) => (
-              <button key={id} onClick={() => scrollToSection(id)} className={`block w-full text-left nav-link ${activeSection === id ? "nav-active" : ""}`}>
+              <button key={id} onClick={() => scrollToSection(id)} className={`block w-full text-left nav-link ${activeSection === id && isHomePage ? "nav-active" : ""}`}>
                 {t(`nav.${id}`)}
               </button>
             ))}
+            <Link to="/blog" onClick={() => setIsOpen(false)} className={`block w-full text-left nav-link ${location.pathname.startsWith('/blog') ? "nav-active" : ""}`}>
+              Blog
+            </Link>
 
             <div className="pt-4 border-t border-border">
               {languages.map((lang) => (
