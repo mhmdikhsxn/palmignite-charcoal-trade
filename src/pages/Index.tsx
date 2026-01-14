@@ -6,6 +6,8 @@ import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import ExportSection from "@/components/ExportSection";
 import GallerySection from "@/components/GallerySection";
+import PackagingSection from "@/components/PackagingSection";
+import ShippingSection from "@/components/ShippingSection";
 
 const Index = () => {
   return (
@@ -14,7 +16,8 @@ const Index = () => {
         <HeroSection />
         <AboutSection />
         <ProductsSection />
-
+        <PackagingSection />
+        <ShippingSection />
         <ExportSection />
         <GallerySection />
         <BlogSection />
