@@ -90,7 +90,7 @@ const ExportSection = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-3 gap-4 md:gap-8 border-t border-white/10 pt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 border-t border-white/10 pt-8">
             {[
               { count: 8, label: t("export.stats.countries.label"), icon: Globe },
               { count: 5, label: t("export.stats.continents.label"), icon: TrendingUp },

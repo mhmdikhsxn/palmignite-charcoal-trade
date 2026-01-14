@@ -13,12 +13,12 @@ const HeroSection = () => {
       id="home"
       className="
         relative
-        min-h-[100vh]
+        min-h-screen
         flex
         items-center
         w-full
         max-w-full
-        overflow-hidden
+        py-20
       "
     >
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -88,7 +88,7 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div className="hidden lg:block animate-fade-in-right">
+            <div className="animate-fade-in-right">
               <div className="relative">
                 <div className="glass-card p-6 rounded-2xl backdrop-blur-xl bg-card/40 border border-glass-border shadow-2xl">
                   <div className="space-y-6">
@@ -140,9 +140,9 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                <div className="absolute -bottom-6 -right-6 glass-card p-6 rounded-xl backdrop-blur-xl bg-gold/10 border border-gold/20 shadow-gold">
-                  <p className="text-sm text-gold font-semibold">{t("hero.badge.title")}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{t("hero.badge.desc")}</p>
+                <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 glass-card p-4 sm:p-6 rounded-xl backdrop-blur-xl bg-gold/10 border border-gold/20 shadow-gold">
+                  <p className="text-xs sm:text-sm text-gold font-semibold">{t("hero.badge.title")}</p>
+                  <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">{t("hero.badge.desc")}</p>
                 </div>
               </div>
             </div>
