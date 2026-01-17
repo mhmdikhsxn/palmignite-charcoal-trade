@@ -207,7 +207,7 @@ const Navbar = () => {
 
       {/* MOBILE MENU */}
       {isOpen && (
-        <div className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden">
+        <div className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm">
           <div className="absolute top-20 left-0 w-full bg-charcoal p-6 space-y-4">
             {menuItems
               .filter((id) => id !== "contact")

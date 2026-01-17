@@ -21,7 +21,7 @@ const ContactSection = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (sectionRef.current) {
@@ -35,14 +35,13 @@ const ContactSection = () => {
     };
   }, []);
 
- const formatPhoneNumber = (value: string) => {
-   return value.replace(/\D/g, "").slice(0, 15); // hanya angka, max 15 digit
- };
+  const formatPhoneNumber = (value: string) => {
+    return value.replace(/\D/g, "").slice(0, 15); // hanya angka, max 15 digit
+  };
 
- const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-   setPhoneNumber(formatPhoneNumber(e.target.value));
- };
-
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumber(formatPhoneNumber(e.target.value));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,12 +50,7 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      await emailjs.sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      );
+      await emailjs.sendForm(import.meta.env.VITE_EMAILJS_SERVICE_ID, import.meta.env.VITE_EMAILJS_TEMPLATE_ID, formRef.current, import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
       toast.success(t("contact.success"));
       formRef.current.reset();
       setPhoneNumber("");
@@ -157,20 +151,19 @@ const ContactSection = () => {
             <div className="lg:col-span-2 order-2 lg:order-1 space-y-8">
               <div className="space-y-6">
                 <div className="relative h-72 rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
+                  {/* Map */}
+                  <iframe
+                    src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=Yogyakarta,%20Indonesia+(Palmignite)&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+                    className="w-full h-full grayscale"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
 
-  {/* Map */}
-  <iframe
-    src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=Yogyakarta,%20Indonesia+(Palmignite)&t=&z=14&ie=UTF8&iwloc=B&output=embed"
-    className="w-full h-full grayscale"
-    style={{ border: 0 }}
-    allowFullScreen
-    loading="lazy"
-    referrerPolicy="no-referrer-when-downgrade"
-  />
-
-  {/* Dark overlay */}
-  <div className="absolute inset-0 bg-black/25 pointer-events-none" />
-</div>
+                  {/* Dark overlay */}
+                  <div className="absolute inset-0 bg-black/25 pointer-events-none" />
+                </div>
 
                 <div className="flex items-start gap-5 group">
                   <div className="w-12 h-12 rounded-xl bg-gold/10 text-gold flex items-center justify-center shrink-0 group-hover:bg-gold group-hover:text-charcoal transition-all duration-300 border border-gold/20">

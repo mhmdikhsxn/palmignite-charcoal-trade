@@ -2,6 +2,7 @@ import bulkLooseImg from "@/assets/packaging-bulk-loose.png";
 import bulkPkgImg from "@/assets/packaging-bulk.png";
 import fullPkgImg from "@/assets/packaging-full.png";
 import MasterBox from "@/assets/masterbox.png";
+import MasterInnerBox from "@/assets/masterbox-inner.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Box, CheckCircle2, Layers, Package } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -88,12 +89,11 @@ const PackagingSection = () => {
           <div className={`transition-all duration-1000 delay-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <div className="overflow-hidden rounded-t-xl">
-                  <img className="w-full h-full transition-transform duration-300 ease-in-out hover:scale-105" src={MasterBox} alt="img" />
-                </div>
-
                 <CorporateCard className="p-8 border-l-4 border-l-gold">
-                  <br />
+                  <div className="overflow-hidden rounded-t-xl">
+                    <img className="w-full h-full transition-transform duration-300 ease-in-out hover:scale-105" src={MasterBox} alt="img" />
+                  </div>
+
                   <h4 className="text-white font-bold text-xl mb-3 flex items-center gap-2">
                     <Box className="w-5 h-5 text-gold" />
                     {t("packaging.masterBox.title")}
@@ -112,27 +112,25 @@ const PackagingSection = () => {
               </div>
 
               <div>
-                <div className="overflow-hidden rounded-t-xl">
-                  <img className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105" src={MasterBox} alt="img" />
-                </div>
-
-              <CorporateCard className="p-8 border-l-4 border-l-gold">
-                <br />
-                <h4 className="text-white font-bold text-xl mb- flex items-center gap-2">
-                  <Layers className="w-5 h-5 text-gold" />
-                  {t("packaging.innerBox.title")}
-                </h4>
-                <ul className="space-y-1">
-                  <li className="flex items-start gap-3 text-gray-300">
-                    <CheckCircle2 className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
-                    <span>{t("packaging.innerBox.sizes")}</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-gray-300">
-                    <CheckCircle2 className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
-                    <span>{t("packaging.innerBox.color")}</span>
-                  </li>
-                </ul>
-              </CorporateCard>
+                <CorporateCard className="p-8 border-l-4 border-l-gold">
+                  <div className="overflow-hidden rounded-t-xl">
+                    <img className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105" src={MasterInnerBox} alt="img" />
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-3 flex items-center gap-2">
+                    <Layers className="w-5 h-5 text-gold" />
+                    {t("packaging.innerBox.title")}
+                  </h4>
+                  <ul className="space-y-1">
+                    <li className="flex items-start gap-3 text-gray-300">
+                      <CheckCircle2 className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
+                      <span>{t("packaging.innerBox.sizes")}</span>
+                    </li>
+                    <li className="flex items-start gap-3 text-gray-300">
+                      <CheckCircle2 className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
+                      <span>{t("packaging.innerBox.color")}</span>
+                    </li>
+                  </ul>
+                </CorporateCard>
               </div>
             </div>
           </div>
