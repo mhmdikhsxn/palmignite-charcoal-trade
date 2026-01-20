@@ -20,7 +20,7 @@ const SupportSection: React.FC = () => {
                 <div className="sr-only">Ministry of Trade - Republic of Indonesia</div>
               </div>
             </div>
-            <p className="text-center text-muted-foreground mt-3 text-sm">Ministry Of Trade</p>
+           
           </div>
 
           {/* CARSURIN */}
@@ -31,7 +31,7 @@ const SupportSection: React.FC = () => {
                 <div className="sr-only">CARSURIN 1968</div>
               </div>
             </div>
-            <p className="text-center text-muted-foreground mt-3 text-sm">Carsurin 1968</p>
+           
           </div>
 
           {/* Surveyor Indonesia */}
@@ -42,7 +42,7 @@ const SupportSection: React.FC = () => {
                 <div className="sr-only">Surveyor Indonesia</div>
               </div>
             </div>
-            <p className="text-center text-muted-foreground mt-3 text-sm">Surveyor Indonesia</p>
+        
           </div>
         </div>
       </div>

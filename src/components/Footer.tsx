@@ -64,15 +64,11 @@ const Footer: React.FC<FooterProps> = ({ mobileMap }) => {
               {[
                 { name: t("footer.nav.about"), id: "about" },
                 { name: t("footer.nav.specs"), id: "products" },
-                { name: t("footer.nav.legal"), href: "https://drive.google.com/drive/folders/1lCKQ2CY_7f2VKOeWnnzZzIF-zP9aFx0U?usp=drive_link" },
                 { name: t("footer.nav.terms"), id: "terms-conditions" },
                 { name: t("footer.nav.privacy"), id: "privacy-policy" },
               ].map((item, i) => (
                 <li key={i}>
                   <a
-                    href={item.href || `#${item.id}`}
-                    target={item.href ? "_blank" : undefined}
-                    rel={item.href ? "noopener noreferrer" : undefined}
                     className="text-muted-foreground hover:text-primary hover:translate-x-1 text-sm transition-all duration-300 flex items-center gap-2 group"
                   >
                     <span className="w-1 h-1 rounded-full bg-primary/20 group-hover:bg-primary transition-colors" />
