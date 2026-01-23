@@ -93,7 +93,7 @@ const ContactSection = () => {
                       <input
                         id="email"
                         name="user_email"
-                        type="email"
+                        type="mail"
                         required
                         className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-600 focus:border-gold/50 focus:ring-1 focus:ring-gold/50 transition-all outline-none"
                         placeholder={t("contact.form.emailPlaceholder")}
@@ -108,7 +108,7 @@ const ContactSection = () => {
                     <input
                       id="phone"
                       name="user_phone"
-                      type="tel"
+                      type="phone"
                       value={phoneNumber}
                       onChange={handlePhoneChange}
                       className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-600 focus:border-gold/50 focus:ring-1 focus:ring-gold/50 transition-all outline-none"
